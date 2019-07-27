@@ -17,3 +17,6 @@ include 'services:webservice'
 */
 
 rootProject.name = 'Plugin'
+
+include ':plugin-api'
+project(':plugin-api').projectDir = new File(settingsDir, './story-plugin-api')
