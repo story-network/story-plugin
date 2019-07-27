@@ -13,7 +13,7 @@ public class StoryPlugin extends MainPlugin {
     public StoryPlugin() {
         this.coreManager = new CoreManager(this);
     }
-    
+
     public CoreManager getCoreManager() {
         return coreManager;
     }

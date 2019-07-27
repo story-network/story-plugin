@@ -57,6 +57,7 @@ public class CoreManager extends MiniPlugin {
         this.plugin = plugin;
     }
 
+    @Override
     public StoryPlugin getPlugin() {
         return plugin;
     }

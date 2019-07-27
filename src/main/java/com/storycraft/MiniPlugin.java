@@ -1,12 +1,10 @@
 package com.storycraft;
 
-import org.bukkit.scheduler.BukkitTask;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
-public abstract class MiniPlugin {
-    
+public class MiniPlugin {
+
     private StoryPlugin plugin;
     private boolean enabled = false;
 
