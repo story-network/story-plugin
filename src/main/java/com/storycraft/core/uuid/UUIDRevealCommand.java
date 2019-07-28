@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.util.AsyncTask;
 import com.storycraft.util.MessageUtil;
 import com.storycraft.util.MojangAPI;
@@ -16,7 +16,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class UUIDRevealCommand extends MiniPlugin implements ICommand {
+public class UUIDRevealCommand extends StoryMiniPlugin implements ICommand {
 
     @Override
     public void onLoad(StoryPlugin plugin) {

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.storycraft.StoryPlugin;
 import com.storycraft.config.json.JsonConfigFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.config.event.ConfigUpdateEvent;
 import com.storycraft.server.event.server.ServerUpdateEvent;
 import com.storycraft.server.playerlist.ServerPlayerList;
@@ -15,7 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class CustomPlayerList extends MiniPlugin implements Listener {
+public class CustomPlayerList extends StoryMiniPlugin implements Listener {
 
     private JsonConfigFile configFile;
 

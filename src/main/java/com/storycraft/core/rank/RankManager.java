@@ -5,7 +5,7 @@ import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
 import com.storycraft.config.json.JsonConfigFile;
 import com.storycraft.config.json.JsonConfigPrettyFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.util.ConnectionUtil;
 import com.storycraft.util.MessageUtil;
 
@@ -22,7 +22,7 @@ import net.minecraft.server.v1_14_R1.PacketPlayOutEntityStatus;
 
 import java.util.StringJoiner;
 
-public class RankManager extends MiniPlugin implements ICommand, Listener {
+public class RankManager extends StoryMiniPlugin implements ICommand, Listener {
 
     public static final ServerRank DEFAULT_RANK = ServerRank.USER;
 

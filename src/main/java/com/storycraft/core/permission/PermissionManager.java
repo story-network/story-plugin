@@ -9,6 +9,8 @@ import java.util.UUID;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.storycraft.MainPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.StoryPlugin;
 import com.storycraft.config.json.JsonConfigEntry;
 import com.storycraft.config.json.JsonConfigFile;
@@ -17,7 +19,6 @@ import com.storycraft.config.event.ConfigUpdateEvent;
 import com.storycraft.core.rank.RankManager;
 import com.storycraft.core.rank.RankUpdateEvent;
 import com.storycraft.core.rank.ServerRank;
-import com.storycraft.server.ServerExtension;
 import com.storycraft.util.MessageUtil;
 import com.storycraft.util.MessageUtil.MessageType;
 import com.storycraft.util.reflect.Reflect;
@@ -31,7 +32,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.permissions.PermissibleBase;
 
-public class PermissionManager extends ServerExtension implements Listener {
+public class PermissionManager extends StoryMiniPlugin implements Listener {
 
     private WrappedField<PermissibleBase, CraftHumanEntity> permField;
     

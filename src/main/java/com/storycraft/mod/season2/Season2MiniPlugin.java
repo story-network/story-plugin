@@ -11,6 +11,7 @@ import com.storycraft.config.json.JsonConfigEntry;
 import com.storycraft.config.json.JsonConfigFile;
 import com.storycraft.config.json.JsonConfigPrettyFile;
 import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.server.advancement.AdvancementType;
 import com.storycraft.server.hologram.Hologram;
 import com.storycraft.server.hologram.ShortHologram;
@@ -31,7 +32,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class Season2MiniPlugin extends MiniPlugin implements Listener {
+public class Season2MiniPlugin extends StoryMiniPlugin implements Listener {
 
     private JsonConfigFile configFile;
 

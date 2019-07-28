@@ -2,7 +2,7 @@ package com.storycraft.core.motd;
 
 import com.storycraft.StoryPlugin;
 import com.storycraft.config.json.JsonConfigFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,7 +13,7 @@ import org.bukkit.event.server.ServerListPingEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ServerMotd extends MiniPlugin implements Listener {
+public class ServerMotd extends StoryMiniPlugin implements Listener {
 
     private JsonConfigFile configFile;
 

@@ -1,6 +1,6 @@
 package com.storycraft.core.player.head;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -11,7 +11,7 @@ import org.bukkit.event.Event.Result;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class CustomHat extends MiniPlugin implements Listener {
+public class CustomHat extends StoryMiniPlugin implements Listener {
 
     public void onEnable(){
         getPlugin().getServer().getPluginManager().registerEvents(this, getPlugin());

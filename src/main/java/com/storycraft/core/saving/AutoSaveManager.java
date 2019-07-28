@@ -1,13 +1,13 @@
 package com.storycraft.core.saving;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.util.AsyncTask;
 import com.storycraft.util.MessageUtil;
 import com.storycraft.util.AsyncTask.AsyncCallable;
 
 import org.bukkit.World;
 
-public class AutoSaveManager extends MiniPlugin {
+public class AutoSaveManager extends StoryMiniPlugin {
 
     private static final int START_OFFSET = 20;
     private static final int SAVE_INTERVAL = 20 * 60 * 30;

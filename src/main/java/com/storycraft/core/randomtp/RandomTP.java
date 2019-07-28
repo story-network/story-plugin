@@ -10,7 +10,7 @@ import com.storycraft.config.IConfigEntry;
 import com.storycraft.config.json.JsonConfigEntry;
 import com.storycraft.config.json.JsonConfigFile;
 import com.storycraft.config.json.JsonConfigPrettyFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.core.rank.ServerRank;
 import com.storycraft.util.MessageUtil;
 import com.storycraft.util.MessageUtil.MessageType;
@@ -20,7 +20,7 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class RandomTP extends MiniPlugin implements ICommand {
+public class RandomTP extends StoryMiniPlugin implements ICommand {
 
     private JsonConfigFile configFile;
 

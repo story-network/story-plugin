@@ -4,7 +4,7 @@ import com.storycraft.StoryPlugin;
 import com.storycraft.config.json.JsonConfigEntry;
 import com.storycraft.config.json.JsonConfigFile;
 import com.storycraft.config.json.JsonConfigPrettyFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.util.BlockIdUtil;
 import com.storycraft.util.Parallel;
 import org.bukkit.Effect;
@@ -32,7 +32,7 @@ import java.util.Random;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class Explosion extends MiniPlugin {
+public class Explosion extends StoryMiniPlugin {
 
     protected final static float LIGHTNING_EXPLOSION = 2.25f;
     protected final static float MOB_FIREBALL_POWER = 2.025f;

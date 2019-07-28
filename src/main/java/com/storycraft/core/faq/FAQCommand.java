@@ -10,7 +10,7 @@ import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
 import com.storycraft.config.json.JsonConfigFile;
 import com.storycraft.config.json.JsonConfigPrettyFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.util.MessageUtil;
 import com.storycraft.util.MessageUtil.MessageType;
 
@@ -18,7 +18,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FAQCommand extends MiniPlugin implements ICommand {
+public class FAQCommand extends StoryMiniPlugin implements ICommand {
 
     private JsonConfigFile configFile;
 

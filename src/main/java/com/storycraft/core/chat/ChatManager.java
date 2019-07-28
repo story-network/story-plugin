@@ -1,13 +1,13 @@
 package com.storycraft.core.chat;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.core.rank.ServerRank;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class ChatManager extends MiniPlugin implements Listener {
+public class ChatManager extends StoryMiniPlugin implements Listener {
 
     @Override
     public void onEnable(){

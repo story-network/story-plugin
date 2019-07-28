@@ -1,6 +1,6 @@
 package com.storycraft.core.disguise;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.server.morph.MorphManager;
 import com.storycraft.server.morph.NamedMorphInfoWrapper;
 import com.storycraft.server.morph.SimpleBlockMorphInfo;
@@ -18,7 +18,7 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class HeadDisguise extends MiniPlugin implements Listener {
+public class HeadDisguise extends StoryMiniPlugin implements Listener {
 
     public MorphManager getMorphManager() {
         return getPlugin().getDecorator().getMorphManager();

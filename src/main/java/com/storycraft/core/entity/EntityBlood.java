@@ -1,6 +1,6 @@
 package com.storycraft.core.entity;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.util.BlockIdUtil;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -13,7 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class EntityBlood extends MiniPlugin implements Listener {
+public class EntityBlood extends StoryMiniPlugin implements Listener {
 
     @Override
     public void onEnable(){

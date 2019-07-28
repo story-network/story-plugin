@@ -1,6 +1,6 @@
 package com.storycraft.core.combat;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.server.hologram.Hologram;
 import com.storycraft.server.hologram.HologramManager;
 import com.storycraft.server.hologram.ShortHologram;
@@ -11,7 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class DamageHologram extends MiniPlugin implements Listener {
+public class DamageHologram extends StoryMiniPlugin implements Listener {
     
     @Override
     public void onEnable(){

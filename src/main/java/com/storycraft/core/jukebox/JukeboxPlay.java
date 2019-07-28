@@ -1,6 +1,6 @@
 package com.storycraft.core.jukebox;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.server.hologram.Hologram;
 import com.storycraft.server.hologram.ShortHologram;
 import com.storycraft.server.event.server.ServerSyncUpdateEvent;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JukeboxPlay extends MiniPlugin implements Listener {
+public class JukeboxPlay extends StoryMiniPlugin implements Listener {
 
     private Map<Block, Hologram> jukeBoxHologramMap;
 

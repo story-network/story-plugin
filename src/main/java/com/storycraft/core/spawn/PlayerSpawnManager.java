@@ -6,7 +6,7 @@ import com.storycraft.StoryPlugin;
 import com.storycraft.config.json.JsonConfigEntry;
 import com.storycraft.config.json.JsonConfigFile;
 import com.storycraft.config.json.JsonConfigPrettyFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -15,7 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-public class PlayerSpawnManager extends MiniPlugin implements Listener {
+public class PlayerSpawnManager extends StoryMiniPlugin implements Listener {
 
     private JsonConfigFile configFile;
 

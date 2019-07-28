@@ -15,7 +15,7 @@ import com.storycraft.command.ICommand;
 import com.storycraft.config.json.JsonConfigEntry;
 import com.storycraft.config.json.JsonConfigFile;
 import com.storycraft.config.json.JsonConfigPrettyFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.core.punish.punishment.*;
 import com.storycraft.server.event.server.ServerUpdateEvent;
 import com.storycraft.util.MessageUtil;
@@ -31,7 +31,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class PunishManager extends MiniPlugin implements Listener {
+public class PunishManager extends StoryMiniPlugin implements Listener {
 
     private JsonConfigFile configFile;
 

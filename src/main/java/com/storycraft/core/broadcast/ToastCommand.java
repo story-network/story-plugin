@@ -2,7 +2,7 @@ package com.storycraft.core.broadcast;
 
 import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.server.advancement.AdvancementType;
 import com.storycraft.util.MessageUtil;
 
@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class ToastCommand extends MiniPlugin implements ICommand {
+public class ToastCommand extends StoryMiniPlugin implements ICommand {
 
     @Override
     public void onLoad(StoryPlugin plugin) {

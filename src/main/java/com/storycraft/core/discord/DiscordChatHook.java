@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.storycraft.StoryPlugin;
 import com.storycraft.config.json.JsonConfigFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.util.AsyncTask;
 import com.storycraft.util.MessageUtil;
 import com.storycraft.util.AsyncTask.AsyncCallable;
@@ -27,7 +27,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class DiscordChatHook extends MiniPlugin implements Listener {
+public class DiscordChatHook extends StoryMiniPlugin implements Listener {
 
     private JsonConfigFile configFile;
 

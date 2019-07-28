@@ -2,7 +2,7 @@ package com.storycraft.core.fly;
 
 import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.core.rank.ServerRank;
 import com.storycraft.util.MessageUtil;
 import com.storycraft.util.MessageUtil.MessageType;
@@ -10,7 +10,7 @@ import com.storycraft.util.MessageUtil.MessageType;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FlyCommand extends MiniPlugin implements ICommand {
+public class FlyCommand extends StoryMiniPlugin implements ICommand {
 
     @Override
     public void onLoad(StoryPlugin plugin) {

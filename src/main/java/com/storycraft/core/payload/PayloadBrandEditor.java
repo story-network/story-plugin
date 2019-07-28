@@ -1,6 +1,6 @@
 package com.storycraft.core.payload;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.StoryPlugin;
 import com.storycraft.server.packet.AsyncPacketOutEvent;
 import com.storycraft.util.reflect.Reflect;
@@ -14,7 +14,7 @@ import net.minecraft.server.v1_14_R1.MinecraftKey;
 import net.minecraft.server.v1_14_R1.PacketDataSerializer;
 import net.minecraft.server.v1_14_R1.PacketPlayOutCustomPayload;
 
-public class PayloadBrandEditor extends MiniPlugin implements Listener {
+public class PayloadBrandEditor extends StoryMiniPlugin implements Listener {
 
     private Reflect.WrappedField<MinecraftKey, PacketPlayOutCustomPayload> payloadChannel;
     private Reflect.WrappedField<PacketDataSerializer, PacketPlayOutCustomPayload> dataSerializer;

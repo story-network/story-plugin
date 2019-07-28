@@ -3,7 +3,7 @@ package com.storycraft.core.broadcast;
 import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
 import com.storycraft.config.json.JsonConfigFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.server.advancement.AdvancementDisplay;
 import com.storycraft.server.advancement.AdvancementType;
 import com.storycraft.core.rank.ServerRank;
@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
-public class BroadcastManager extends MiniPlugin implements ICommand, Listener {
+public class BroadcastManager extends StoryMiniPlugin implements ICommand, Listener {
 
     public static final int BROADCAST_FADE = 250;
     public static final int BROADCAST_TIME = 1500;

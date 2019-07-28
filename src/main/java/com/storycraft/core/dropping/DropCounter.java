@@ -1,6 +1,6 @@
 package com.storycraft.core.dropping;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -10,7 +10,7 @@ import org.bukkit.event.entity.ItemMergeEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class DropCounter extends MiniPlugin implements Listener {
+public class DropCounter extends StoryMiniPlugin implements Listener {
     @Override
     public void onEnable(){
         getPlugin().getServer().getPluginManager().registerEvents(this, getPlugin());

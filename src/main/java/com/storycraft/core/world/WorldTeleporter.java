@@ -2,7 +2,7 @@ package com.storycraft.core.world;
 
 import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.core.rank.ServerRank;
 import com.storycraft.util.MessageUtil;
 import org.bukkit.World;
@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
-public class WorldTeleporter extends MiniPlugin implements ICommand {
+public class WorldTeleporter extends StoryMiniPlugin implements ICommand {
 
     @Override
     public void onLoad(StoryPlugin plugin) {

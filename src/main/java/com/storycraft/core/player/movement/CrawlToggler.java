@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
@@ -20,7 +20,7 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 
-public class CrawlToggler extends MiniPlugin implements Listener {
+public class CrawlToggler extends StoryMiniPlugin implements Listener {
 
     private static final int DOUBLE_SNEAK_MAX_DELAY = 800;
 

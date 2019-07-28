@@ -2,7 +2,7 @@ package com.storycraft.core.player.login;
 
 import java.util.UUID;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -12,7 +12,7 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result;
 
-public class ServerKickMessage extends MiniPlugin implements Listener {
+public class ServerKickMessage extends StoryMiniPlugin implements Listener {
     
     @Override
     public void onEnable() {

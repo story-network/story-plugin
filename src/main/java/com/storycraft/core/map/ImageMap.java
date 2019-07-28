@@ -20,7 +20,7 @@ import com.storycraft.command.ICommand;
 import com.storycraft.config.json.JsonConfigEntry;
 import com.storycraft.config.json.JsonConfigFile;
 import com.storycraft.config.json.JsonConfigPrettyFile;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.server.map.CustomMapData;
 import com.storycraft.server.map.render.ImageRenderer;
 import com.storycraft.util.AsyncTask;
@@ -38,7 +38,7 @@ import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 
-public class ImageMap extends MiniPlugin {
+public class ImageMap extends StoryMiniPlugin {
 
     private JsonConfigFile configFile;
 

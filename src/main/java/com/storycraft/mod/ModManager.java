@@ -1,11 +1,11 @@
 package com.storycraft.mod;
 
 import com.storycraft.StoryPlugin;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.MiniPluginLoader;
 import com.storycraft.mod.season2.Season2MiniPlugin;
 
-public class ModManager extends MiniPlugin {
+public class ModManager extends StoryMiniPlugin {
 
     private StoryPlugin plugin;
 
@@ -15,7 +15,7 @@ public class ModManager extends MiniPlugin {
 
     @Override
     public void onLoad(StoryPlugin plugin) {
-        MiniPluginLoader loader = plugin.getMiniPluginLoader();
+        MiniPluginLoader<StoryPlugin> loader = plugin.getMiniPluginLoader();
 
         loader.addMiniPlugin(new Season2MiniPlugin());
     }
@@ -34,7 +34,7 @@ public class ModManager extends MiniPlugin {
         return plugin;
     }
 
-    public MiniPluginLoader getMiniPluginLoader() {
+    public MiniPluginLoader<StoryPlugin> getMiniPluginLoader() {
         return getPlugin().getMiniPluginLoader();
     }
 }

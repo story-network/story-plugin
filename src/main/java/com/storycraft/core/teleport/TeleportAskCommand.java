@@ -6,14 +6,14 @@ import java.util.UUID;
 
 import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.util.MessageUtil;
 import com.storycraft.util.MessageUtil.MessageType;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class TeleportAskCommand extends MiniPlugin implements ICommand {
+public class TeleportAskCommand extends StoryMiniPlugin implements ICommand {
 
     public static final int ALLOWED_TIME = 120000;
 

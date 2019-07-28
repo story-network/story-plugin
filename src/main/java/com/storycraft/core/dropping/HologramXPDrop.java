@@ -1,6 +1,6 @@
 package com.storycraft.core.dropping;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.server.hologram.Hologram;
 import com.storycraft.server.hologram.HologramManager;
 import com.storycraft.server.hologram.SimpleHologram;
@@ -20,7 +20,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 import java.util.List;
 
-public class HologramXPDrop extends MiniPlugin implements Listener {
+public class HologramXPDrop extends StoryMiniPlugin implements Listener {
 
     private static final int SHOW_TIME = 30;
 

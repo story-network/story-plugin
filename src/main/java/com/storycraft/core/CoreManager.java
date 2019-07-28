@@ -1,6 +1,6 @@
 package com.storycraft.core;
 
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.MiniPluginLoader;
 import com.storycraft.StoryPlugin;
 import com.storycraft.core.broadcast.BroadcastManager;
@@ -38,7 +38,7 @@ import com.storycraft.core.uuid.UUIDRevealCommand;
 import com.storycraft.core.world.WorldTeleporter;
 import com.storycraft.mod.ModManager;
 
-public class CoreManager extends MiniPlugin {
+public class CoreManager extends StoryMiniPlugin {
 
     private StoryPlugin plugin;
 
@@ -62,7 +62,7 @@ public class CoreManager extends MiniPlugin {
         return plugin;
     }
 
-    public MiniPluginLoader getMiniPluginLoader() {
+    public MiniPluginLoader<StoryPlugin> getMiniPluginLoader() {
         return getPlugin().getMiniPluginLoader();
     }
 
@@ -72,21 +72,21 @@ public class CoreManager extends MiniPlugin {
             throw new RuntimeException("Illegal load");
         }
 
-        preInitMiniPlugin();
+        preInitStoryMiniPlugin();
 
-        initMiniPlugin();
+        initStoryMiniPlugin();
     }
 
-    protected void preInitMiniPlugin() {
-        MiniPluginLoader loader = getMiniPluginLoader();
+    protected void preInitStoryMiniPlugin() {
+        MiniPluginLoader<StoryPlugin> loader = getMiniPluginLoader();
         loader.addMiniPlugin(rankManager = new RankManager());
         loader.addMiniPlugin(playerManager = new PlayerManager());
         loader.addMiniPlugin(entityManager = new EntityManager());
         loader.addMiniPlugin(punishManager = new PunishManager());
     }
 
-    protected void initMiniPlugin() {
-        MiniPluginLoader loader = getMiniPluginLoader();
+    protected void initStoryMiniPlugin() {
+        MiniPluginLoader<StoryPlugin> loader = getMiniPluginLoader();
         loader.addMiniPlugin(new PermissionManager());
         loader.addMiniPlugin(new Explosion());
         loader.addMiniPlugin(new ServerSpawnManager());
@@ -113,11 +113,11 @@ public class CoreManager extends MiniPlugin {
         loader.addMiniPlugin(new ImageMap());
         loader.addMiniPlugin(new PayloadBrandEditor());
 
-        postInitMiniPlugin();
+        postInitStoryMiniPlugin();
     }
 
-    protected void postInitMiniPlugin() {
-        MiniPluginLoader loader = getMiniPluginLoader();
+    protected void postInitStoryMiniPlugin() {
+        MiniPluginLoader<StoryPlugin> loader = getMiniPluginLoader();
 
         loader.addMiniPlugin(modManager = new ModManager(getPlugin()));
     }

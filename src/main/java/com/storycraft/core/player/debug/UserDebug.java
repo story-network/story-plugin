@@ -1,7 +1,7 @@
 package com.storycraft.core.player.debug;
 
 import com.storycraft.StoryPlugin;
-import com.storycraft.MiniPlugin;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.core.rank.RankUpdateEvent;
 import com.storycraft.core.rank.ServerRank;
 import com.storycraft.server.packet.AsyncPacketOutEvent;
@@ -21,7 +21,7 @@ import org.bukkit.event.Listener;
 
 import io.netty.buffer.Unpooled;
 
-public class UserDebug extends MiniPlugin implements Listener {
+public class UserDebug extends StoryMiniPlugin implements Listener {
 
     private static final boolean DEFAULT = false;
 
