@@ -17,7 +17,7 @@ public class ModManager extends StoryMiniPlugin {
     public void onLoad(StoryPlugin plugin) {
         MiniPluginLoader<StoryPlugin> loader = plugin.getMiniPluginLoader();
 
-        loader.addMiniPlugin(new Season2MiniPlugin());
+        //loader.addMiniPlugin(new Season2MiniPlugin());
     }
 
     @Override
