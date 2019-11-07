@@ -1,22 +1,19 @@
 package com.storycraft.mod.season2;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
 import com.storycraft.config.json.JsonConfigEntry;
 import com.storycraft.config.json.JsonConfigFile;
 import com.storycraft.config.json.JsonConfigPrettyFile;
-import com.storycraft.MiniPlugin;
-import com.storycraft.StoryMiniPlugin;
+import com.storycraft.core.spawn.PlayerSpawnManager;
 import com.storycraft.server.advancement.AdvancementType;
 import com.storycraft.server.hologram.Hologram;
 import com.storycraft.server.hologram.ShortHologram;
-import com.storycraft.core.spawn.PlayerSpawnManager;
-import com.storycraft.util.AsyncTask;
 import com.storycraft.util.MessageUtil;
 import com.storycraft.util.MessageUtil.MessageType;
 

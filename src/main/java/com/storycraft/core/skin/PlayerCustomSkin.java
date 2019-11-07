@@ -1,54 +1,41 @@
 package com.storycraft.core.skin;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
 import com.google.common.collect.Sets;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import com.storycraft.StoryMiniPlugin;
 import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
 import com.storycraft.config.json.JsonConfigEntry;
 import com.storycraft.config.json.JsonConfigFile;
-import com.storycraft.StoryMiniPlugin;
 import com.storycraft.server.packet.AsyncPacketOutEvent;
 import com.storycraft.util.AsyncTask;
+import com.storycraft.util.AsyncTask.AsyncCallable;
 import com.storycraft.util.ConnectionUtil;
 import com.storycraft.util.MessageUtil;
+import com.storycraft.util.MessageUtil.MessageType;
 import com.storycraft.util.MineSkinAPI;
 import com.storycraft.util.MojangAPI;
-import com.storycraft.util.AsyncTask.AsyncCallable;
-import com.storycraft.util.MessageUtil.MessageType;
 import com.storycraft.util.reflect.Reflect;
 import com.storycraft.util.reflect.Reflect.WrappedField;
 
-import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_14_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
-import net.minecraft.server.v1_14_R1.DimensionManager;
 import net.minecraft.server.v1_14_R1.EntityPlayer;
-import net.minecraft.server.v1_14_R1.Packet;
-import net.minecraft.server.v1_14_R1.PacketPlayOutEntity;
-import net.minecraft.server.v1_14_R1.PacketPlayOutEntityTeleport;
 import net.minecraft.server.v1_14_R1.PacketPlayOutPlayerInfo;
+import net.minecraft.server.v1_14_R1.PacketPlayOutPlayerInfo.EnumPlayerInfoAction;
 import net.minecraft.server.v1_14_R1.PacketPlayOutPosition;
 import net.minecraft.server.v1_14_R1.PacketPlayOutRespawn;
-import net.minecraft.server.v1_14_R1.WorldType;
-import net.minecraft.server.v1_14_R1.PacketPlayOutPlayerInfo.*;
 
 public class PlayerCustomSkin extends StoryMiniPlugin implements Listener {
 
