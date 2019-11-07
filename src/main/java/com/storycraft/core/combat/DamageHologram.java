@@ -20,19 +20,19 @@ public class DamageHologram extends StoryMiniPlugin implements Listener {
 
     private List<HologramTimeData> hologramList;
 
-    private int hologramLastTick;
+    private int hologramLastTime;
 
     public DamageHologram() {
         this.hologramList = new ArrayList<>();
-        this.hologramLastTick = 20;
+        this.hologramLastTime = 1300;
     }
 
     public int getHologramLastTime() {
-        return hologramLastTick;
+        return hologramLastTime;
     }
 
     public void setHologramLastTime(int hologramLastTime) {
-        this.hologramLastTick = hologramLastTime;
+        this.hologramLastTime = hologramLastTime;
     }
     
     @Override
@@ -52,13 +52,15 @@ public class DamageHologram extends StoryMiniPlugin implements Listener {
         this.hologramList.add(new HologramTimeData(System.currentTimeMillis(), hologram));
     }
 
+    @EventHandler
     public void onUpdate(ServerUpdateEvent e) {
-        if (!e.isUpdateType(UpdateType.SECOND) || this.hologramList.isEmpty()) {
+        if ((e.getCurrentTick() % 5) == 0 || this.hologramList.isEmpty()) {
             return;
         }
 
+        long now = System.currentTimeMillis();
         for (HologramTimeData data : new ArrayList<>(this.hologramList)) {
-            if (data.getCreatedAt() + this.hologramLastTick < System.currentTimeMillis()) {
+            if (data.getCreatedAt() + this.hologramLastTime < now) {
                 getPlugin().getDecorator().getHologramManager().removeHologram(data.getHologram());
                 this.hologramList.remove(data);
             }
