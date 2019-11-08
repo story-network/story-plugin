@@ -9,17 +9,13 @@ import com.storycraft.util.ConnectionUtil;
 import com.storycraft.util.reflect.Reflect;
 
 import net.minecraft.server.v1_14_R1.EntityPlayer;
-import net.minecraft.server.v1_14_R1.MinecraftKey;
-import net.minecraft.server.v1_14_R1.PacketDataSerializer;
-import net.minecraft.server.v1_14_R1.PacketPlayOutCustomPayload;
 import net.minecraft.server.v1_14_R1.PacketPlayOutEntityStatus;
 import net.minecraft.server.v1_14_R1.PacketPlayOutLogin;
 
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-
-import io.netty.buffer.Unpooled;
 
 public class UserDebug extends StoryMiniPlugin implements Listener {
 
@@ -49,14 +45,13 @@ public class UserDebug extends StoryMiniPlugin implements Listener {
         }
     }
 
-    @EventHandler
-    public void onRankChange(RankUpdateEvent e) {
+    public PacketPlayOutEntityStatus getDedugStatusPacket(Player p) {
         PacketPlayOutEntityStatus packet;
 
-        EntityPlayer ep = ((CraftPlayer)e.getPlayer()).getHandle();
+        EntityPlayer ep = ((CraftPlayer)p).getHandle();
         byte status;
 
-        if (e.getPlayer().hasPermission("server.play.debug")) {
+        if (p.hasPermission("server.play.debug")) {
             status = 0x23;
         }
         else {
@@ -65,6 +60,11 @@ public class UserDebug extends StoryMiniPlugin implements Listener {
 
         packet = new PacketPlayOutEntityStatus(ep, status);
 
-        ConnectionUtil.sendPacket(e.getPlayer(), packet);
+        return packet;
+    }
+
+    @EventHandler
+    public void onRankChange(RankUpdateEvent e) {
+        ConnectionUtil.sendPacket(e.getPlayer(), getDedugStatusPacket(e.getPlayer()));
     }
 }
