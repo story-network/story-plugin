@@ -1,6 +1,7 @@
 package com.storycraft.mod;
 
 import com.storycraft.StoryPlugin;
+import com.storycraft.mod.season3.Season3MiniPlugin;
 import com.storycraft.StoryMiniPlugin;
 import com.storycraft.MiniPluginLoader;
 
@@ -15,6 +16,9 @@ public class ModManager extends StoryMiniPlugin {
     @Override
     public void onLoad(StoryPlugin plugin) {
         MiniPluginLoader<StoryPlugin> loader = plugin.getMiniPluginLoader();
+
+        loader.addMiniPlugin(new Season3MiniPlugin());
+    
     }
 
     @Override
