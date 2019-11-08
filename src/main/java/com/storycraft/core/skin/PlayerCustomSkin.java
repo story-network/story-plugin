@@ -2,6 +2,7 @@ package com.storycraft.core.skin;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -195,7 +196,10 @@ public class PlayerCustomSkin extends StoryMiniPlugin implements Listener {
     }
 
     protected void onConfigLoad(Void v, Throwable t) {
-        for (Player p : new ArrayList<>(getPlugin().getServer().getOnlinePlayers())) {
+        Iterator<? extends Player> playerIter = getPlugin().getServer().getOnlinePlayers().iterator();
+        while (playerIter.hasNext()) {
+            Player p = (Player) playerIter.next();
+            
             UUID profileId = getPlayerProfileId(p);
 
             if (!p.isOnline() || !isPlayerHaveCustomSkin(profileId))

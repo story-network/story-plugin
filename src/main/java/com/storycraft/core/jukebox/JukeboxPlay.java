@@ -17,15 +17,15 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class JukeboxPlay extends StoryMiniPlugin implements Listener {
 
     private Map<Block, Hologram> jukeBoxHologramMap;
 
     public JukeboxPlay(){
-        this.jukeBoxHologramMap = new HashMap<>();
+        this.jukeBoxHologramMap = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class JukeboxPlay extends StoryMiniPlugin implements Listener {
 
     @EventHandler
     public void onUpdate(ServerSyncUpdateEvent e){
-        for (Block block : new ArrayList<>(jukeBoxHologramMap.keySet())){
+        for (Block block : jukeBoxHologramMap.keySet()){
             Hologram hologram = jukeBoxHologramMap.get(block);
 
             if (block.getState() != null && block.getState() instanceof Jukebox){

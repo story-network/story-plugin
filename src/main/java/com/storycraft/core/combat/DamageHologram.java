@@ -1,6 +1,7 @@
 package com.storycraft.core.combat;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.storycraft.StoryMiniPlugin;
@@ -24,7 +25,7 @@ public class DamageHologram extends StoryMiniPlugin implements Listener {
 
     public DamageHologram() {
         this.hologramList = new ArrayList<>();
-        this.hologramLastTime = 1300;
+        this.hologramLastTime = 1250;
     }
 
     public int getHologramLastTime() {
@@ -54,15 +55,17 @@ public class DamageHologram extends StoryMiniPlugin implements Listener {
 
     @EventHandler
     public void onUpdate(ServerUpdateEvent e) {
-        if ((e.getCurrentTick() % 5) == 0 || this.hologramList.isEmpty()) {
+        if (this.hologramList.isEmpty()) {
             return;
         }
 
         long now = System.currentTimeMillis();
-        for (HologramTimeData data : new ArrayList<>(this.hologramList)) {
+        Iterator<HologramTimeData> iter = this.hologramList.iterator();
+        while (iter.hasNext()) {
+            HologramTimeData data = iter.next();
             if (data.getCreatedAt() + this.hologramLastTime < now) {
                 getPlugin().getDecorator().getHologramManager().removeHologram(data.getHologram());
-                this.hologramList.remove(data);
+                iter.remove();
             }
         }
     }

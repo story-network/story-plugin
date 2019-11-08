@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
@@ -40,8 +41,8 @@ public class PunishManager extends StoryMiniPlugin implements Listener {
     private Map<UUID, Map<PunishmentInfo, IPunishment.PunishmentHandler>> handlerMap;
 
     public PunishManager() {
-        this.punishmentList = new HashMap<>();
-        this.handlerMap = new HashMap<>();
+        this.punishmentList = new ConcurrentHashMap<>();
+        this.handlerMap = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -81,11 +82,11 @@ public class PunishManager extends StoryMiniPlugin implements Listener {
     public void onUpdate(ServerUpdateEvent e) {
         long now = System.currentTimeMillis();
 
-        for (UUID id : new ArrayList<>(handlerMap.keySet())) {
+        for (UUID id : handlerMap.keySet()) {
 
             Map<PunishmentInfo, IPunishment.PunishmentHandler> map = handlerMap.get(id);
 
-            for (PunishmentInfo info : new ArrayList<>(map.keySet())) {
+            for (PunishmentInfo info : map.keySet()) {
                 if (info.isExpired(now)) {
                     removePlayerPunishment(id, info);
                 }
@@ -110,11 +111,9 @@ public class PunishManager extends StoryMiniPlugin implements Listener {
     }
 
     protected void removePlayerHandler(UUID id) {
-        List<PunishmentInfo> infoList = getPlayerPunishment(id);
-
         Map<PunishmentInfo, IPunishment.PunishmentHandler> playerHandlerMap = getPlayerHandlerMap(id);
 
-        for (PunishmentInfo info : new ArrayList<>(playerHandlerMap.keySet())) {
+        for (PunishmentInfo info : playerHandlerMap.keySet()) {
             removePlayerHandler(id, info);
         }
 
@@ -249,7 +248,7 @@ public class PunishManager extends StoryMiniPlugin implements Listener {
 
         List<PunishmentInfo> punishList = getPlayerPunishment(id);
 
-        for (PunishmentInfo info : new ArrayList<>(punishList)) {
+        for (PunishmentInfo info : punishList) {
             if (info.getType().equals(punishment)) {
                 punishList.remove(info);
                 removePlayerHandler(id, info);

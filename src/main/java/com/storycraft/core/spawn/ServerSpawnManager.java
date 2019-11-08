@@ -1,6 +1,7 @@
 package com.storycraft.core.spawn;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.storycraft.StoryPlugin;
 import com.storycraft.command.ICommand;
@@ -108,9 +109,13 @@ public class ServerSpawnManager extends StoryMiniPlugin implements Listener {
         if (getCanBlockInteract())
             return;
 
-        for (Block b : new ArrayList<>(e.blockList())) {
+        Iterator<Block> blockIter = e.blockList().iterator();
+
+        while (blockIter.hasNext()) {
+            Block b = blockIter.next();
+
             if (b != null && isInSpawn(b.getLocation()))
-                e.blockList().remove(b);
+                blockIter.remove();
         }
     }
 
