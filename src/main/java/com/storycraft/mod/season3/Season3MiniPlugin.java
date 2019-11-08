@@ -102,7 +102,7 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
         p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(new AttributeModifier("StoryNetwork S3 combat advantage", 3, Operation.ADD_SCALAR));
         
         p.teleportAsync(getSpawnLocation()).thenApply((Boolean b) -> {
-            getPlugin().getDecorator().getAdvancementManager().sendToastToPlayer(p, "StoryServer 플레이어 프로필 생성 완료", AdvancementType.TASK, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
+            getPlugin().getDecorator().getAdvancementManager().sendToastToPlayer(p, "StoryServer 플레이어 프로필 생성 완료", AdvancementType.CHALLENGE, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
             
             return null;
         });
