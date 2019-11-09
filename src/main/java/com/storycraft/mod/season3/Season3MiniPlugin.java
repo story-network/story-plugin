@@ -53,7 +53,7 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
             this.spawnLocation.setWorld(getPlugin().getDefaultWorld());
             this.spawnLocation.setY(getPlugin().getDefaultWorld().getHighestBlockAt(176, 248).getY());
         
-            this.spawnHologram = new ShortHologram(this.spawnLocation.clone().add(0, 1.75, 0), ChatColor.AQUA + "스폰지점", ChatColor.WHITE + "스폰 주변 " + getPlugin().getCoreManager().getServerSpawnManager().getSpawnRadius() + "블록 은 보호되어있습니다", ChatColor.LIGHT_PURPLE + "Story Network S3");
+            this.spawnHologram = new ShortHologram(this.spawnLocation.clone().add(0, 1.75, 0), ChatColor.AQUA + "스폰지점", ChatColor.WHITE + "스폰 주변 " + getPlugin().getCoreManager().getServerSpawnManager().getSpawnRadius() + "블록은 보호되어있습니다", ChatColor.LIGHT_PURPLE + "Story Network S3");
     
             getPlugin().getDecorator().getHologramManager().addHologram(getSpawnHologram());
         });
