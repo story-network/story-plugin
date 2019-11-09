@@ -233,15 +233,15 @@ public class PermissionManager extends StoryMiniPlugin implements Listener {
 
     @EventHandler
     public void onRankUpdate(RankUpdateEvent e) {
-        if (isInjected(e.getPlayer())) {
-            PermissibleManaged managed = (PermissibleManaged) permField.get((CraftHumanEntity) e.getPlayer());
-
-            managed.setAllowPermList(getAllowedList(e.getTo(), e.getPlayer()));
-            managed.setBlockPermList(getBlockedList(e.getTo(), e.getPlayer()));
-            managed.recalculatePermissions();
-        }
-        else
+        if (!isInjected(e.getPlayer())) {
             injectToPlayer(e.getPlayer());
+        }
+
+        PermissibleManaged managed = (PermissibleManaged) permField.get((CraftHumanEntity) e.getPlayer());
+
+        managed.setAllowPermList(getAllowedList(e.getTo(), e.getPlayer()));
+        managed.setBlockPermList(getBlockedList(e.getTo(), e.getPlayer()));
+        managed.recalculatePermissions();
 
         e.getPlayer().updateCommands();
     }
@@ -254,6 +254,10 @@ public class PermissionManager extends StoryMiniPlugin implements Listener {
 
                 if (p == null)
                     continue;
+
+                if (!isInjected(p)) {
+                    injectToPlayer(p);
+                }
 
                 PermissibleManaged managed = (PermissibleManaged) permField.get((CraftHumanEntity) p);
 

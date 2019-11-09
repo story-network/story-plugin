@@ -32,6 +32,8 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
 
     private JsonConfigFile configFile;
 
+    private static UUID modifierUUID = UUID.fromString("7e761c07-f525-45f8-9577-86daaec40b10");
+
     private Hologram spawnHologram;
 
     private Location spawnLocation;
@@ -43,14 +45,15 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        this.spawnLocation = new Location(null, 176, 0, 248);
+        this.spawnLocation = getPlugin().getCoreManager().getServerSpawnManager().getSpawnLocation();
+
         getPlugin().getServer().getPluginManager().registerEvents(this, getPlugin());
 
         getPlugin().getServer().getScheduler().runTask(getPlugin(), () -> {
             this.spawnLocation.setWorld(getPlugin().getDefaultWorld());
             this.spawnLocation.setY(getPlugin().getDefaultWorld().getHighestBlockAt(176, 248).getY());
         
-            this.spawnHologram = new ShortHologram(this.spawnLocation.clone().add(0, 1.75, 0), ChatColor.AQUA + "스폰지점", ChatColor.LIGHT_PURPLE + "Story Network S3");
+            this.spawnHologram = new ShortHologram(this.spawnLocation.clone().add(0, 1.75, 0), ChatColor.AQUA + "스폰지점", ChatColor.WHITE + "스폰 주변 " + getPlugin().getCoreManager().getServerSpawnManager().getSpawnRadius() + " 은 보호되어있습니다", ChatColor.LIGHT_PURPLE + "Story Network S3");
     
             getPlugin().getDecorator().getHologramManager().addHologram(getSpawnHologram());
         });
@@ -96,10 +99,7 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
     protected void firstJoinHandler(Player p) {
         getPlayerProfile(p.getUniqueId()).set("firstJoin", System.currentTimeMillis());
 
-        getPlugin().getCoreManager().getPlayerManager().getPlayerSpawnManager().setSpawnEnabled(p.getUniqueId(), true);
-        getPlugin().getCoreManager().getPlayerManager().getPlayerSpawnManager().setSpawnLocation(p.getUniqueId(), getSpawnLocation());
-
-        p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(new AttributeModifier("StoryNetwork S3 combat advantage", 3, Operation.ADD_SCALAR));
+        p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(new AttributeModifier(modifierUUID, "StoryNetwork S3 combat advantage", 3, Operation.ADD_SCALAR));
         
         p.teleportAsync(getSpawnLocation()).thenApply((Boolean b) -> {
             getPlugin().getDecorator().getAdvancementManager().sendToastToPlayer(p, "StoryServer 플레이어 프로필 생성 완료", AdvancementType.CHALLENGE, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));

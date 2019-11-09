@@ -41,6 +41,8 @@ public class CoreManager extends StoryMiniPlugin {
     private PlayerManager playerManager;
     private EntityManager entityManager;
 
+    private ServerSpawnManager serverSpawnManager;
+
     private PunishManager punishManager;
 
     private RankManager rankManager;
@@ -56,6 +58,10 @@ public class CoreManager extends StoryMiniPlugin {
     @Override
     public StoryPlugin getPlugin() {
         return plugin;
+    }
+
+    public ServerSpawnManager getServerSpawnManager() {
+        return serverSpawnManager;
     }
 
     public MiniPluginLoader<StoryPlugin> getMiniPluginLoader() {
@@ -85,7 +91,7 @@ public class CoreManager extends StoryMiniPlugin {
         MiniPluginLoader<StoryPlugin> loader = getMiniPluginLoader();
         loader.addMiniPlugin(new PermissionManager());
         loader.addMiniPlugin(new Explosion());
-        loader.addMiniPlugin(new ServerSpawnManager());
+        loader.addMiniPlugin(serverSpawnManager = new ServerSpawnManager());
         loader.addMiniPlugin(new ChatManager());
         loader.addMiniPlugin(new EntityBlood());
         loader.addMiniPlugin(new DropCounter());
