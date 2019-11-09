@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
@@ -43,7 +44,9 @@ public class PermissionManager extends StoryMiniPlugin implements Listener {
 
     public PermissionManager() {
         permField = Reflect.getField(CraftHumanEntity.class, "perm");
-        playerTrackMap = new HashMap<>();
+        permField.unlockFinal();
+        
+        playerTrackMap = new ConcurrentHashMap<>();
     }
 
     @Override
