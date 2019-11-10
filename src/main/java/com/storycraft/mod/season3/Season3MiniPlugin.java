@@ -143,7 +143,17 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
             LivingEntity entity = (LivingEntity) e.getEntity();
 
             AttributeModifier entityModifier = new AttributeModifier(entityModifierUUID, "StoryNetwork S3 entity advantage", 0.3 + Math.random() * 1.2, Operation.MULTIPLY_SCALAR_1);
-            entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(entityModifier);
+            AttributeInstance hp = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+            Iterator<AttributeModifier> modifierIter = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getModifiers().iterator();
+            while (modifierIter.hasNext()) {
+                AttributeModifier modifier = modifierIter.next();
+
+                if (modifier.getUniqueId().equals(entityModifierUUID)) {
+                    modifierIter.remove();
+                }
+            }
+            
+            hp.addModifier(entityModifier);
             entity.setHealth(entity.getMaxHealth());
         }
     }
