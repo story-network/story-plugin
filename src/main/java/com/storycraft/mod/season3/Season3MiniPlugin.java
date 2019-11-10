@@ -1,5 +1,6 @@
 package com.storycraft.mod.season3;
 
+import java.util.Collection;
 import java.util.UUID;
 
 import com.destroystokyo.paper.event.block.BlockDestroyEvent;
@@ -16,14 +17,17 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
+import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -32,7 +36,13 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
 
     private JsonConfigFile configFile;
 
-    private static UUID modifierUUID = UUID.fromString("7e761c07-f525-45f8-9577-86daaec40b10");
+    private static UUID combatModifierUUID = UUID.fromString("7e761c07-f525-45f8-9577-86daaec40b10");
+    private static UUID entityModifierUUID = UUID.fromString("538f4c4b-1562-474b-bbc8-6e429ddd817b");
+    private static UUID axeNurfModifierUUID = UUID.fromString("538f4c4b-1562-474b-bbc8-6e429ddd817b");
+
+    private static AttributeModifier combatModifier = new AttributeModifier(combatModifierUUID, "StoryNetwork S3 combat advantage", 3, Operation.ADD_SCALAR);
+    private static AttributeModifier entityModifier = new AttributeModifier(entityModifierUUID, "StoryNetwork S3 entity advantage", 0.2 + Math.random() * 1.05, Operation.ADD_SCALAR);
+    private static AttributeModifier axeModifier = new AttributeModifier(axeNurfModifierUUID, "StoryNetwork S3 Axe nurf", -0.5, Operation.ADD_SCALAR);
 
     private Hologram spawnHologram;
 
@@ -99,7 +109,7 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
     protected void firstJoinHandler(Player p) {
         getPlayerProfile(p.getUniqueId()).set("firstJoin", System.currentTimeMillis());
 
-        p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(new AttributeModifier(modifierUUID, "StoryNetwork S3 combat advantage", 3, Operation.ADD_SCALAR));
+        p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(combatModifier);
         
         p.teleportAsync(getSpawnLocation()).thenApply((Boolean b) -> {
             getPlugin().getDecorator().getAdvancementManager().sendToastToPlayer(p, "StoryServer 플레이어 프로필 생성 완료", AdvancementType.CHALLENGE, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
@@ -109,11 +119,28 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
     }
 
     @EventHandler
+    public void onItemChanged(PlayerItemHeldEvent e) {
+        ItemStack item = e.getPlayer().getInventory().getItem(e.getNewSlot());
+
+        if (item == null) {
+            return;
+        }
+
+        AttributeInstance attackSpeed = e.getPlayer().getAttribute(Attribute.GENERIC_ATTACK_SPEED);
+
+        attackSpeed.removeModifier(axeModifier);
+
+        if (item.getType() == Material.WOODEN_AXE || item.getType() == Material.STONE_AXE || item.getType() == Material.DIAMOND_AXE) {
+            attackSpeed.addModifier(axeModifier);
+        }
+    }
+
+    @EventHandler
     public void onEntitySpawn(EntitySpawnEvent e) {
         if (e.getEntity() instanceof LivingEntity) {
             LivingEntity entity = (LivingEntity) e.getEntity();
 
-            entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(new AttributeModifier("StoryNetwork S3 combat advantage", 1.2 + Math.random() * 1.3, Operation.ADD_SCALAR));
+            entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(entityModifier);
             entity.setHealth(entity.getMaxHealth());
         }
     }
@@ -127,14 +154,15 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
 
     @EventHandler
     public void onSpawnerBroken(BlockDestroyEvent e) {
-        if (e.getBlock() == null || e.getBlock().getType() != Material.SPAWNER) {
+        if (e.getBlock() == null || e.isCancelled()|| e.getBlock().getState().getType() != Material.SPAWNER) {
             return;
         }
 
-        e.setCancelled(true);
-        Location blockLocation = e.getBlock().getLocation();
+        Block block = e.getBlock();
 
-        blockLocation.getWorld().dropItemNaturally(blockLocation, new ItemStack(Material.SPAWNER));
+        Collection<ItemStack> drops = block.getDrops();
+        drops.clear();
+        drops.add(new ItemStack(Material.SPAWNER));
     }
 
     @EventHandler
