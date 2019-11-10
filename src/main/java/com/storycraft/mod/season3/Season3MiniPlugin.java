@@ -130,7 +130,7 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
 
         attackSpeed.removeModifier(axeModifier);
 
-        if (item.getType() == Material.WOODEN_AXE || item.getType() == Material.STONE_AXE || item.getType() == Material.DIAMOND_AXE) {
+        if (item.getType() == Material.WOODEN_AXE || item.getType() == Material.STONE_AXE || item.getType() == Material.IRON_AXE || item.getType() == Material.DIAMOND_AXE) {
             attackSpeed.addModifier(axeModifier);
         }
     }
