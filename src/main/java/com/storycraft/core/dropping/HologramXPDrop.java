@@ -15,6 +15,7 @@ import org.bukkit.craftbukkit.v1_14_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
@@ -29,7 +30,7 @@ public class HologramXPDrop extends StoryMiniPlugin implements Listener {
         getPlugin().getServer().getPluginManager().registerEvents(this, getPlugin());
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDeath(EntityDeathEvent e){
         Player killer = e.getEntity().getKiller();
 

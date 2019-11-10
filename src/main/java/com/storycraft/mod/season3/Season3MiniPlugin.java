@@ -1,9 +1,9 @@
 package com.storycraft.mod.season3;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.UUID;
 
-import com.destroystokyo.paper.event.block.BlockDestroyEvent;
 import com.storycraft.StoryMiniPlugin;
 import com.storycraft.StoryPlugin;
 import com.storycraft.config.json.JsonConfigEntry;
@@ -21,11 +21,14 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.block.Block;
+import org.bukkit.block.CreatureSpawner;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -40,9 +43,8 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
     private static UUID entityModifierUUID = UUID.fromString("538f4c4b-1562-474b-bbc8-6e429ddd817b");
     private static UUID axeNurfModifierUUID = UUID.fromString("538f4c4b-1562-474b-bbc8-6e429ddd817b");
 
-    private static AttributeModifier combatModifier = new AttributeModifier(combatModifierUUID, "StoryNetwork S3 combat advantage", 3, Operation.ADD_SCALAR);
-    private static AttributeModifier entityModifier = new AttributeModifier(entityModifierUUID, "StoryNetwork S3 entity advantage", 0.2 + Math.random() * 1.05, Operation.ADD_SCALAR);
-    private static AttributeModifier axeModifier = new AttributeModifier(axeNurfModifierUUID, "StoryNetwork S3 Axe nurf", -0.5, Operation.ADD_SCALAR);
+    private static AttributeModifier combatModifier = new AttributeModifier(combatModifierUUID, "StoryNetwork S3 combat advantage", 3, Operation.MULTIPLY_SCALAR_1);
+    private static AttributeModifier axeModifier = new AttributeModifier(axeNurfModifierUUID, "StoryNetwork S3 Axe nurf", -0.5, Operation.MULTIPLY_SCALAR_1);
 
     private Hologram spawnHologram;
 
@@ -140,8 +142,26 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
         if (e.getEntity() instanceof LivingEntity) {
             LivingEntity entity = (LivingEntity) e.getEntity();
 
+            AttributeModifier entityModifier = new AttributeModifier(entityModifierUUID, "StoryNetwork S3 entity advantage", 0.3 + Math.random() * 1.2, Operation.MULTIPLY_SCALAR_1);
             entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(entityModifier);
             entity.setHealth(entity.getMaxHealth());
+        }
+    }
+
+    @EventHandler
+    public void onEntityDie(EntityDeathEvent e) {
+        if (e.getEntity() != null) {
+            LivingEntity entity = e.getEntity();
+
+            Iterator<AttributeModifier> modifierIter = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getModifiers().iterator();
+
+            while (modifierIter.hasNext()) {
+                AttributeModifier modifier = modifierIter.next();
+
+                if (modifier.getUniqueId().equals(entityModifierUUID)) {
+                    e.setDroppedExp((int) Math.round(e.getDroppedExp() * (0.7 + modifier.getAmount())));
+                }
+            }
         }
     }
 
@@ -153,8 +173,15 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
     }
 
     @EventHandler
-    public void onSpawnerBroken(BlockDestroyEvent e) {
-        if (e.getBlock() == null || e.isCancelled()|| e.getBlock().getState().getType() != Material.SPAWNER) {
+    public void onSpawnerBroken(BlockBreakEvent e) {
+        if (e.getBlock() == null| e.isCancelled()|| !(e.getBlock().getState() instanceof CreatureSpawner)) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        ItemStack mineItem = p.getInventory().getItemInMainHand();
+
+        if (mineItem == null || !mineItem.containsEnchantment(Enchantment.SILK_TOUCH)) {
             return;
         }
 
