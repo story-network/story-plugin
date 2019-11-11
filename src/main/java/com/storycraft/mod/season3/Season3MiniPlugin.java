@@ -184,7 +184,7 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
 
     @EventHandler
     public void onSpawnerBroken(BlockBreakEvent e) {
-        if (e.getBlock() == null| e.isCancelled()|| !(e.getBlock().getState() instanceof CreatureSpawner)) {
+        if (e.getBlock() == null || e.isCancelled()|| !(e.getBlock().getState() instanceof CreatureSpawner)) {
             return;
         }
 
