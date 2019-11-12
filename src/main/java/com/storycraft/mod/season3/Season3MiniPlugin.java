@@ -2,8 +2,10 @@ package com.storycraft.mod.season3;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
+import com.google.common.collect.Lists;
 import com.storycraft.StoryMiniPlugin;
 import com.storycraft.StoryPlugin;
 import com.storycraft.config.json.JsonConfigEntry;
@@ -23,11 +25,14 @@ import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
@@ -144,11 +149,11 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
 
             AttributeModifier entityModifier = new AttributeModifier(entityModifierUUID, "StoryNetwork S3 entity advantage", 0.3 + Math.random() * 1.2, Operation.MULTIPLY_SCALAR_1);
             AttributeInstance hp = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-            Iterator<AttributeModifier> modifierIter = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getModifiers().iterator();
+            Iterator<AttributeModifier> modifierIter = hp.getModifiers().iterator();
             while (modifierIter.hasNext()) {
                 AttributeModifier modifier = modifierIter.next();
 
-                if (modifier.getUniqueId().equals(entityModifierUUID)) {
+                if (entityModifierUUID.equals(modifier.getUniqueId())) {
                     modifierIter.remove();
                 }
             }
@@ -182,24 +187,59 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onSpawnerBroken(BlockBreakEvent e) {
-        if (e.getBlock() == null || e.isCancelled()|| !(e.getBlock().getState() instanceof CreatureSpawner)) {
+        if (e.getBlock() == null || e.isCancelled() || e.getBlock().getType() != Material.SPAWNER) {
             return;
         }
 
         Player p = e.getPlayer();
         ItemStack mineItem = p.getInventory().getItemInMainHand();
 
-        if (mineItem == null || !mineItem.containsEnchantment(Enchantment.SILK_TOUCH)) {
+        if (p == null || mineItem == null || !mineItem.containsEnchantment(Enchantment.SILK_TOUCH)) {
             return;
         }
 
         Block block = e.getBlock();
+        CreatureSpawner spawnerState = (CreatureSpawner) block.getState();
 
-        Collection<ItemStack> drops = block.getDrops();
-        drops.clear();
-        drops.add(new ItemStack(Material.SPAWNER));
+        Location loc = block.getLocation();
+
+        e.setDropItems(false);
+        e.setExpToDrop(0);
+
+        ItemStack spawnerItem = new ItemStack(Material.SPAWNER, 1);
+
+        spawnerItem.setLore(Lists.newArrayList(ChatColor.YELLOW + "소환 엔디티 타입", ChatColor.GRAY + spawnerState.getSpawnedType().getName()));
+
+        loc.getWorld().dropItemNaturally(loc, spawnerItem);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerPlaceSpawner(BlockPlaceEvent e) {
+        if (e.getPlayer() == null || e.getItemInHand() == null || e.getBlockPlaced() == null || !(e.getBlockPlaced().getState() instanceof CreatureSpawner) || e.getItemInHand().getType() != Material.SPAWNER) {
+            return;
+        }
+
+        Player p = e.getPlayer();
+        ItemStack spawnerItem = e.getItemInHand();
+        List<String> loreData = spawnerItem.getLore();
+
+        if (loreData.size() < 2) {
+            return;
+        }
+
+        EntityType spawnType = EntityType.PIG;
+        try {
+            spawnType = EntityType.fromName(loreData.get(1).substring(2));
+        } catch (Exception ex) {
+            // PASS
+        }
+
+        CreatureSpawner spawnerState = (CreatureSpawner) e.getBlockPlaced().getState();
+
+        spawnerState.setSpawnedType(spawnType);
+        spawnerState.update();
     }
 
     @EventHandler
