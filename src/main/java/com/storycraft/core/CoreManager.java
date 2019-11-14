@@ -3,6 +3,7 @@ package com.storycraft.core;
 import com.storycraft.MiniPluginLoader;
 import com.storycraft.StoryMiniPlugin;
 import com.storycraft.StoryPlugin;
+import com.storycraft.core.anvil.AnvilStyler;
 import com.storycraft.core.broadcast.BroadcastManager;
 import com.storycraft.core.broadcast.ToastCommand;
 import com.storycraft.core.chat.ChatManager;
@@ -103,6 +104,7 @@ public class CoreManager extends StoryMiniPlugin {
         loader.addMiniPlugin(new ColoredChat());
         loader.addMiniPlugin(new FlyCommand());
         loader.addMiniPlugin(new FAQCommand());
+        loader.addMiniPlugin(new AnvilStyler());
         loader.addMiniPlugin(new ToastCommand());
         loader.addMiniPlugin(new HeadDisguise());
         loader.addMiniPlugin(new HologramXPDrop());
