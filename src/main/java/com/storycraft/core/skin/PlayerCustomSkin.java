@@ -1,6 +1,7 @@
 package com.storycraft.core.skin;
 
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,16 +28,17 @@ import com.storycraft.util.reflect.Reflect;
 import com.storycraft.util.reflect.Reflect.WrappedField;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import net.minecraft.server.v1_14_R1.EntityPlayer;
-import net.minecraft.server.v1_14_R1.PacketPlayOutPlayerInfo;
-import net.minecraft.server.v1_14_R1.PacketPlayOutPlayerInfo.EnumPlayerInfoAction;
-import net.minecraft.server.v1_14_R1.PacketPlayOutPosition;
-import net.minecraft.server.v1_14_R1.PacketPlayOutRespawn;
+import net.minecraft.server.v1_15_R1.EntityPlayer;
+import net.minecraft.server.v1_15_R1.PacketPlayOutPlayerInfo;
+import net.minecraft.server.v1_15_R1.PacketPlayOutPlayerInfo.EnumPlayerInfoAction;
+import net.minecraft.server.v1_15_R1.PacketPlayOutPosition;
+import net.minecraft.server.v1_15_R1.PacketPlayOutRespawn;
+import net.minecraft.server.v1_15_R1.WorldData;
 
 public class PlayerCustomSkin extends StoryMiniPlugin implements Listener {
 
@@ -59,7 +61,7 @@ public class PlayerCustomSkin extends StoryMiniPlugin implements Listener {
         this.infodataList = Reflect.getField(PacketPlayOutPlayerInfo.class, "b");
         this.infoAction = Reflect.getField(PacketPlayOutPlayerInfo.class, "a");
         try {
-            this.gameProfileField = Reflect.getField(Class.forName("net.minecraft.server.v1_14_R1.PacketPlayOutPlayerInfo$PlayerInfoData"), "d");
+            this.gameProfileField = Reflect.getField(Class.forName("net.minecraft.server.v1_15_R1.PacketPlayOutPlayerInfo$PlayerInfoData"), "d");
             gameProfileField.unlockFinal();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -213,9 +215,10 @@ public class PlayerCustomSkin extends StoryMiniPlugin implements Listener {
         EntityPlayer ep = ((CraftPlayer) p).getHandle();
         PacketPlayOutPlayerInfo removePacket = new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.REMOVE_PLAYER, ep);
         PacketPlayOutPlayerInfo infoPacket = new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.ADD_PLAYER, ep);
-        PacketPlayOutRespawn respawnPacket = new PacketPlayOutRespawn(ep.getWorld().worldProvider.getDimensionManager(), ep.getWorld().P(), ep.playerInteractManager.getGameMode());
 
-        PacketPlayOutPosition refreshPacket = new PacketPlayOutPosition(ep.locX, ep.locY, ep.locZ, ep.yaw, ep.pitch, Sets.newHashSet(), -12);
+        PacketPlayOutRespawn respawnPacket = new PacketPlayOutRespawn(ep.getWorld().worldProvider.getDimensionManager(), WorldData.c(ep.getWorld().getWorldData().getSeed()), ep.getWorld().P(), ep.playerInteractManager.getGameMode());
+
+        PacketPlayOutPosition refreshPacket = new PacketPlayOutPosition(ep.locX(), ep.locY(), ep.locZ(), ep.yaw, ep.pitch, Sets.newHashSet(), -12);
 
         ConnectionUtil.sendPacket(removePacket, infoPacket);
         ConnectionUtil.sendPacket(p, respawnPacket, refreshPacket);

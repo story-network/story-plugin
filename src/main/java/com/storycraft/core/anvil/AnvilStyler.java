@@ -8,9 +8,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import net.minecraft.server.v1_14_R1.ContainerAnvil;
-import net.minecraft.server.v1_14_R1.EntityPlayer;
-import net.minecraft.server.v1_14_R1.SharedConstants;
+import net.minecraft.server.v1_15_R1.ContainerAnvil;
+import net.minecraft.server.v1_15_R1.EntityPlayer;
+import net.minecraft.server.v1_15_R1.SharedConstants;
 
 public class AnvilStyler extends StoryMiniPlugin implements Listener {
 

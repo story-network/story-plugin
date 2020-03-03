@@ -14,6 +14,7 @@ import com.storycraft.config.json.JsonConfigPrettyFile;
 import com.storycraft.server.advancement.AdvancementType;
 import com.storycraft.server.hologram.Hologram;
 import com.storycraft.server.hologram.ShortHologram;
+import com.storycraft.server.world.universe.BuildUniverse;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -58,6 +59,8 @@ public class Season3MiniPlugin extends StoryMiniPlugin implements Listener {
     @Override
     public void onLoad(StoryPlugin plugin) {
         plugin.getConfigManager().addConfigFile("session3.json", configFile = new JsonConfigPrettyFile()).run();
+
+        plugin.getServerManager().getWorldManager().loadWorld(new BuildUniverse("build"));
     }
 
     @Override
